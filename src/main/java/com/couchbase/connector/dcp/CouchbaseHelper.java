@@ -94,7 +94,7 @@ public class CouchbaseHelper {
   public static Bucket openMetadataBucket(CouchbaseConfig config, Supplier<KeyStore> keystore) {
     // xxx there's no way to shut down this environment :-/
     final CouchbaseEnvironment env = environmentBuilder(config, keystore).build();
-    return createCluster(config, env).openBucket(config.metadataBucket());
+    return createCluster(config, env).openBucket(config.metadataBucket(), 30, TimeUnit.SECONDS);
   }
 
   public static CouchbaseBucketConfig getBucketConfig(Bucket bucket) {
@@ -113,7 +113,7 @@ public class CouchbaseHelper {
 
     while (true) {
       try {
-        return cluster.openBucket(bucket);
+        return cluster.openBucket(bucket, 30, TimeUnit.SECONDS);
       } catch (Exception e) {
         if (!ThrowableHelper.hasCause(e,
             ConnectException.class, RequestCancelledException.class, TemporaryFailureException.class)) {

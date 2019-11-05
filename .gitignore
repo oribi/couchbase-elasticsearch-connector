@@ -35,3 +35,10 @@ src/*/generated/
 src/*/generated_tests/
 
 
+bin/
+.settings/
+.classpath
+.project
+.vscode/
+
+
