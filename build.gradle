@@ -143,7 +143,7 @@ tasks.withType(CreateStartScripts) {
 }
 
 mainClassName = "com.couchbase.connector.elasticsearch.ElasticsearchConnector"
-applicationDefaultJvmArgs = ['-server']
+applicationDefaultJvmArgs = ['-server -Dcom.couchbase.client.deps.io.netty.leakDetection.level=advanced -Dcom.couchbase.client.deps.io.netty.noPreferDirect=true']
 
 startScripts {
   applicationName = 'cbes'
